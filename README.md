@@ -3,9 +3,9 @@ version v0.4
 
 18/12/2013
 
-Spectre Raw Formater 
+Useful Bash Scripts
 
-[Fernando García Redondo](http://www.fernandeando.com) / Fido Vidaña
+[Fernando García Redondo](http://www.fernandeando.com) / [Fido Vidaña](http://www.fidomenal.com)
 [fgarcia@die.upm.es](mailto:fgarcia@die.upm.es)
 
 ****************************
