@@ -13,6 +13,6 @@ Useful Bash Scripts
 
 ****************************
 # How To
-	* Each script should be correctly documented and stored in the respective folder
-	* Each folder should have its own README.md file
+* Each script should be correctly documented and stored in the respective folder
+* Each folder should have its own README.md file
 ****************************
