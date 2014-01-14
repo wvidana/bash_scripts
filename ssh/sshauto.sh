@@ -16,7 +16,7 @@ DOM=$(sed -n '1 p' ~/.sshauto-var)
 TERMINAL=$(sed -n '2 p' ~/.sshauto-var)
 
 message(){
-  echo "  Open multiple ssh+screen terminals (default termianl wfce4-terminal)"
+  echo "  Open multiple ssh+screen terminals (default terminal xfce4-terminal)"
   echo ""
   echo "  Use:	sshauto host1 host2..."
   echo ""

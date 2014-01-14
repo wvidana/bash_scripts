@@ -1,11 +1,11 @@
 # README
-version v0.2
+version v0.3
 
 12/01/2014
 
 Useful ssh scripts
 
-[Fido Vidaña](http://www.fidomenal.com)
+[Wilfrido Vidaña](http://www.fidomenal.com)
 
 ******
 # Copyright
@@ -18,7 +18,7 @@ Tested under xfce4-terminal
 ******
 # How To sshauto
 
-Open multiple ssh+screen terminals (default termianl wfce4-terminal)
+Open multiple ssh+screen terminals (default terminal xfce4-terminal)
 ```
   Use:	sshauto host1 host2...
 
@@ -30,10 +30,5 @@ Open multiple ssh+screen terminals (default termianl wfce4-terminal)
       prints this help
    -v | --version)
       prints current version
-  NOTE: current terminal: xfce4-terminal
-        current domain: lst.tfo.upm.es
-  Copyright (C) 2013 by Wilfrido Vidaña Sayegh under the terms of the GNU General Public License v3
-  Version: v0.3
-
 ```
 ******
