@@ -1,48 +1,37 @@
 #!/bin/bash
 
 # Copyright (C) 2013 by Wilfrido Vidaña Sayegh under the terms of the GNU General Public License
-version='v0.2'
+version='v0.3'
 
 DOT='.'
 
-if [ -f ~/.sshauto-var ]
-then
-  TERMINAL=$(cat ~/.sshauto-var)
-else
-  TERMINAL='xfce4-terminal'
+touch ~/.sshauto-var
+if (( 2 != $(wc -l < ~/.sshauto-var) ))
+  then
+  echo "" >> ~/.sshauto-var
+  echo "" >> ~/.sshauto-var
 fi
 
-setvar(){
-  touch ~/.sshauto-var
-  echo "$1" > ~/.sshauto-var
-  echo "default terminal changed to: ""$1"
-}
+DOM=$(sed -n '1 p' ~/.sshauto-var)
+TERMINAL=$(sed -n '2 p' ~/.sshauto-var)
 
 message(){
   echo "  Open multiple ssh+screen terminals (default termianl wfce4-terminal)"
   echo ""
-  echo "  Use:	sshauto host1.domain.example host2.domain.example..."
+  echo "  Use:	sshauto host1 host2..."
   echo ""
+  echo "   first use)"
+  echo "        no arguments for interactive console to set parameters"
   echo "   -d | --domain)"
   echo "         sshauto -d domain host1 host2 host3..."
-  echo "   -s | --server)
-      Use the variable DOM_sshauto as default domain
-      write 'export DOM_sshauto=domain' without quotes if you want to set this variable
-      then execute the script like follows:"
-  echo "         sshauto -s host1 host2 host3..."
-#  echo "		-sd | --savedomain)
-#				Same as --domain but it saves the domain as bash variable DOM_sshauto for further use with --server"
   echo "   -h | --help)
       prints this help"
   echo "   -v | --version)
       prints current version"
-  echo "   -t | --terminal)
-      change the default terminal, storing the variable in ~/.sshauto-var"
-  echo "         sshauto -t example-terminal"
-  echo "  NOTE: current terminal ""$TERMINAL"
+  echo "  NOTE: current terminal: ""$TERMINAL"
+  echo "        current domain: ""$DOM"
   echo "  Copyright (C) 2013 by Wilfrido Vidaña Sayegh under the terms of the GNU General Public License v3"
   echo "  Version: ""$version"
-  exit
 
 }
 
@@ -58,8 +47,26 @@ all_servers(){
 
 if [ $# -eq 0 ]
 then
-  message;
+  message
+  echo "Write your default domain. Blank line wouldn't overwrite"
+  echo -n "> "
+  read -r DEFdom
+  echo "Now write your default terminal (blank for default if first use)"
+  echo -n "> "
+  read -r DEFter
+  if [ -n "$DEFdom" ]
+  then
+    sed -i '1 c\'"$DEFdom"'' ~/.sshauto-var
+  fi
+  if [ -n "$DEFter" ]
+  then  
+    sed -i '2 c\'"$DEFter"'' ~/.sshauto-var
+  fi
 else
+  if [ -z "$TERMINAL" ]
+    then
+    TERMINAL="xfce4-terminal"
+  fi
   case "$1" in
     -d|--domain)
 	shift
@@ -67,27 +74,6 @@ else
 	shift
 	all_servers "$DOM" "$@"
 	;;
-    -s|--server)
-	if [ -z "$DOM_sshauto" ]
-	then
-	  echo "error: no existe la variable de entorno DOM_sshauto"
-	else
-    	  shift
-    	  DOM="$DOT""$DOM_sshauto"
-    	  all_servers "$DOM" "$@"
-	fi
-    	;;
-      -t|--terminal)
-  setvar "$2"
-      ;;
-#    -sd | --savedomain)
-#	shift
-#	DOM_sshauto="$1"
-#	export DOM_sshauto
-#	DOM="$DOT""$1"
-#	shift
-#	all_servers "$DOM" "$@"
-#	;;
     -v|--version)
 	echo "Version: ""$version"
 	;;
@@ -95,8 +81,14 @@ else
 	message
 	;;
     *)	
-	DOM=''
-	all_servers "$DOM" "$@"
+  if [ -n "$DOM" ]
+  then
+    DOM="$DOT""$DOM"
+    all_servers "$DOM" "$@"
+  else
+    echo "Error: faltan argumentos predefinidos en ~/.sshauto-var"
+    exit
+  fi
 	;;
   esac
 fi
