@@ -87,6 +87,7 @@ else
     all_servers "$DOM" "$@"
   else
     echo "Error: faltan argumentos predefinidos en ~/.sshauto-var"
+    echo "Ejecuta sshauto sin argumentos y rellena el dominio cuando te lo pida"
     exit
   fi
 	;;
