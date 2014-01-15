@@ -1,7 +1,5 @@
 # README
-version v0.4
-
-18/12/2013
+version v0.4.1, 15/01/2014
 
 Useful Bash Scripts
 

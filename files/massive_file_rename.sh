@@ -1,5 +1,5 @@
 #!/bin/sh
-echo 'Usage ./massive_file_rename'
+echo 'Usage sh massive_file_rename.sh'
 
 ls > /tmp/list ; seq -w `ls | wc -l` | paste /tmp/list - | awk -F\\t '{ print $1, "IMG"$2".jpg"}' | xargs -n2 mv
 
