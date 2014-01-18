@@ -19,6 +19,7 @@ Tested under xfce4-terminal
 # How To sshauto
 
 Open multiple ssh+screen terminals (default terminal xfce4-terminal)
+The equivalent command would be: terminal -x ssh -t root@host screen -D -R
 ```
   Use:	sshauto host1 host2...
 
