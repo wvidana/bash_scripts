@@ -27,7 +27,7 @@ terminal -x ssh -t root@host screen -D -R
 ```
 sshauto
 ```
-* Regular Usage
+* Regular Usage. NOTE: hosts' name only, with NO domain. Example: for mail.google.com the host would be "mail", because the domain "google.com" was previously configured in the first use of sshauto
 ```
 sshauto host1 host2...
 ```
