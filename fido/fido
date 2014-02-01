@@ -1,7 +1,8 @@
 #usage fido <filename> <config_attribute> <variable>
 if [[ -z $2 ]]
 	then
-	echo usage fido <filename> <config_attribute> <variable>
+	echo "usage fido <filename> <config_attribute> <variable>"
+	exit 1
 fi
 line_number=$(grep -n "$2 *="  $1 | cut -f1 -d:)
 new_value=$2"="$3
