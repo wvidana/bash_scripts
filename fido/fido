@@ -1,0 +1,14 @@
+#usage fido <filename> <config_attribute> <variable>
+if [[ -z $2 ]]
+	then
+	echo usage fido <filename> <config_attribute> <variable>
+fi
+line_number=$(grep -n "$2 *="  $1 | cut -f1 -d:)
+new_value=$2"="$3
+echo -e "\e[1mOriginal expression:\e[21m"
+sed -n "$line_number"p $1
+sed -in "$line_number"s/.*/"$new_value"/ $1
+rm $1n
+echo -e "\e[1mNew expression:\e[21m"
+sed -n "$line_number"p $1
+

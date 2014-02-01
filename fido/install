@@ -1,0 +1,8 @@
+if [ "$(id -u)" != "0" ]; then
+	echo "Sorry, you are not root...Trust me it's ok"
+	exit 1
+fi
+chmod +x fido fido_completion
+cp fido /usr/bin/fido
+cp fido_completion /etc/bash_completion.d/fido
+echo "Instalation Succeeded, to make fido work you have to restart your terminals."

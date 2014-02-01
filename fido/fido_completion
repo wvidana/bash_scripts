@@ -1,0 +1,43 @@
+# file: fido_completion
+# fido parameter-completion
+
+_fido ()   
+{                
+  local cur
+  # Pointer to current completion word.
+  # By convention, it's named "cur" but this isn't strictly necessary.
+
+  COMPREPLY=()   # Array variable storing the possible completions.
+  cur=${COMP_WORDS[COMP_CWORD]} #COMP_WORDS array containing all the arguments introduced by the user.
+  file=${COMP_WORDS[1]}
+  conf=${COMP_WORDS[2]} 
+
+  case "$COMP_CWORD" in #COMP_CWORD number of arguments inserted by users.
+    1)
+    if [[ -z $cur ]]
+      then  
+      COMPREPLY=($(ls -A))
+    else
+      COMPREPLY=($(ls -A | grep -iF $cur | tr '\n' ' '))
+    fi;;
+
+    2)
+    if [[ -z $cur ]]
+      then  
+      COMPREPLY=($(cat $file | grep -v "#" | grep "=" | cut -d "=" -f 1 | tr '\n' ' '))
+    else
+      COMPREPLY=($(cat $file | grep -v "#" | grep "=" | cut -d "=" -f 1  | grep -i $cur | tr '\n' ' ' ))   
+    fi;;
+
+    3)
+      COMPREPLY=(\'$(grep -E "$conf *=" $file | tr '\n' \' | cut -d "=" -f 2)) ;; 
+
+    *)
+      COMPREPLY=($(ls -A));;
+
+  esac
+
+  return 0
+}
+
+complete -F _fido fido #export cutom completion function, to be stored in /etc/bash_completion.d/
