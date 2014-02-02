@@ -1,5 +1,5 @@
 #usage fido <filename> <config_attribute> <variable>
-if [[ -z $2 ]]
+if [[ -z $2 || -z $3 || -z $1 ]]
 	then
 	echo "usage fido <filename> <config_attribute> <variable>"
 	exit 1

@@ -3,6 +3,6 @@ if [ "$(id -u)" != "0" ]; then
 	exit 1
 fi
 chmod +x fido fido_completion
-cp fido /usr/bin/fido
-cp fido_completion /etc/bash_completion.d/fido
+cp -p fido /usr/bin/fido
+cp -p fido_completion /etc/bash_completion.d/fido
 echo "Instalation Succeeded, to make fido work you have to restart your terminals."

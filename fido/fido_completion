@@ -10,18 +10,21 @@ _fido ()
   COMPREPLY=()   # Array variable storing the possible completions.
   cur=${COMP_WORDS[COMP_CWORD]} #COMP_WORDS array containing all the arguments introduced by the user.
   file=${COMP_WORDS[1]}
+  if ! [[ -z $(echo $file | grep \~) ]]
+      then
+      user=$(whoami)
+      file=$(echo $file | sed -e s/\~/\\/home\\/"$user"/g )
+    fi
   conf=${COMP_WORDS[2]} 
 
   case "$COMP_CWORD" in #COMP_CWORD number of arguments inserted by users.
-    1)
-    if [[ -z $cur ]]
-      then  
-      COMPREPLY=($(ls -A))
-    else
-      COMPREPLY=($(ls -A | grep -iF $cur | tr '\n' ' '))
-    fi;;
+   
+    1) #Search around the directories
+    _filedir
+    ;;
 
-    2)
+    2) #look into the config attributes
+
     if [[ -z $cur ]]
       then  
       COMPREPLY=($(cat $file | grep -v "#" | grep "=" | cut -d "=" -f 1 | tr '\n' ' '))
@@ -29,15 +32,16 @@ _fido ()
       COMPREPLY=($(cat $file | grep -v "#" | grep "=" | cut -d "=" -f 1  | grep -i $cur | tr '\n' ' ' ))   
     fi;;
 
-    3)
+    3) #print current state 
       COMPREPLY=(\'$(grep -E "$conf *=" $file | tr '\n' \' | cut -d "=" -f 2)) ;; 
 
     *)
-      COMPREPLY=($(ls -A));;
+      _filedir
+      ;;
 
   esac
 
   return 0
 }
 
-complete -F _fido fido #export cutom completion function, to be stored in /etc/bash_completion.d/
+complete -F _fido fido  #export cutom completion function, to be stored in /etc/bash_completion.d/
