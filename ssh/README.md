@@ -5,7 +5,7 @@ version v0.3
 
 Useful ssh scripts
 
-[Wilfrido Vidaña](http://www.fidomenal.com)
+[Wilfrido Vidana](mailto:wvidanas@gmail.com)
 
 ******
 # Copyright

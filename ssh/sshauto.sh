@@ -17,7 +17,7 @@ TERMINAL=$(sed -n '2 p' ~/.sshauto-var)
 
 message(){
   echo "  Open multiple ssh+screen terminals (default terminal xfce4-terminal)"
-  echo "  The equivalent command would be: terminal -x ssh -t root@host screen -D -R"
+  echo "  The equivalent command would be: terminal -e ssh -t root@host screen -D -R"
   echo ""
   echo "  Use:	sshauto host1 host2..."
   echo ""
@@ -41,7 +41,7 @@ all_servers(){
   shift
   for var in "$@"
   do
-    "$TERMINAL" -x ssh -t root@"$var""$domain" screen -R -D &
+    "$TERMINAL" -e ssh -t root@"$var""$domain" screen -R -D &
     sleep 1
   done
 }
