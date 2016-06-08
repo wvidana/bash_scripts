@@ -13,12 +13,9 @@ else
   modulename=$(basename "$1")
   modulename="${modulename%.*}"
 
-  zip "$modulename".zip "$1"
-
-  shift
-
   for lib in "$@"
   do
     zip -r "$modulename".zip "$lib"
   done
 fi
+
