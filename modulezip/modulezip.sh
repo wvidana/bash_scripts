@@ -15,7 +15,6 @@ else
 
   for lib in "$@"
   do
-    zip -r "$modulename".zip "$lib"
+    zip -r "$modulename".zip "$lib" --exclude "*.pyc"
   done
 fi
-
