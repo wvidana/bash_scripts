@@ -10,8 +10,18 @@ if [ $# -eq 0 ]
 then
   message
 else
-  for var in $@
-  do
-    find . -iname "*$var*" | grep --color=always $var
-  done
+  if [ -t 1 ]
+  then
+    # Colorful output for interactive terminals
+    for var in $@
+    do
+      find . -iname "*$var*" | grep --color=always $var
+    done
+  else
+    # No color for pipes and redirects
+    for var in $@
+    do
+      find . -iname "*$var*"
+    done
+  fi
 fi
