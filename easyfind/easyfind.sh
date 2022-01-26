@@ -15,7 +15,7 @@ else
     # Colorful output for interactive terminals
     for var in $@
     do
-      find . -iname "*$var*" | grep --color=always $var
+      find . -iname "*$var*" | grep --color=always -i $var
     done
   else
     # No color for pipes and redirects
